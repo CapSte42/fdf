@@ -1,0 +1,6 @@
+gcc main.c ft_checkfile.c -Lminilibx_linux -lmlx -lX11 -lXext ./libft/libft.a -I./include
+
+
+gcc test/main.c -Iminilibx_linux -Lminilibx_linux -lmlx -lX11 -lXext
+
+make clean -C libft

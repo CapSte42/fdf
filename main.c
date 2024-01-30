@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:59:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/25 15:02:49 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/01/27 16:10:39 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int	main(int ac, char **av)
 
 	ft_checkfile(av[1]);
 /* 		ft_read_coordinate(**coordinates); */
+
 }
 

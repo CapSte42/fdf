@@ -6,28 +6,34 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:43:45 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/25 17:34:40 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:43:21 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_lines(const char *file)
+static ssize_t	count_lines(const char *file)
 {
 	int		fd;
-	int		i;
+	ssize_t	i;
+	char	*line;
 
-	fd = ft_open_file(file);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (-2);
 	i = 0;
-	while (ft_get_next_line(fd) != NULL)
+	line = ft_get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
 		i++;
+		line = ft_get_next_line(fd);
+	}
 	close(fd);
 	ft_get_next_line(-42);
 	return (i);
 }
-
+/*
 int	ft_get_all_lines(const char *file, char ***all_lines)
 {
 	int		i;
@@ -49,10 +55,37 @@ int	ft_get_all_lines(const char *file, char ***all_lines)
 	while (line != NULL)
 	{
 		(*all_lines)[++i] = line;
-		line = ft_get_next_line(fd);
-		line = ft_strtrim(line, "\n");
+		temp_line = ft_get_next_line(fd);
+		line = ft_strtrim(temp_line, "\n");
+		free(temp_line);
 	}
 	close(fd);
 	ft_get_next_line(-42);
 	return (i);
+} */
+
+ssize_t ft_get_all_lines(const char *file, char ***all_lines)
+{
+	int		fd;
+	char	*all_file_one_line;
+	char	*line;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (fd);
+	all_file_one_line = ft_calloc(1, 1);
+	if (all_file_one_line == NULL)
+		return (close(fd));
+	line = ft_get_next_line(fd);
+	while (line != NULL)
+	{
+		all_file_one_line = ft_strjoin(all_file_one_line, line);
+		free(line);
+		line = ft_get_next_line(fd);
+	}
+	ft_get_next_line(-42);
+	*all_lines = ft_split(all_file_one_line, '\n');
+	close(fd);
+	free(all_file_one_line);
+	return (count_lines(file));
 }

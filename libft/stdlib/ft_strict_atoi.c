@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strict_atoi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 14:23:02 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/31 22:28:52 by smontuor         ###   ########.fr       */
+/*   Created: 2023/12/11 13:09:12 by smontuor          #+#    #+#             */
+/*   Updated: 2024/01/31 22:09:03 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static int	ft_ispositive(int c)
 	return (-1);
 }
 
-int	ft_atoi(const char *nptr)
+static intmax_t	ft_mount_num(const char *nptr, int *error)
 {
-	size_t	i;
-	size_t	z;
-	size_t	sign;
+	intmax_t	i;
+	size_t		z;
+	size_t		sign;
 
 	i = 0;
 	z = 0;
@@ -31,7 +31,10 @@ int	ft_atoi(const char *nptr)
 	while (ft_isspace(nptr[z]))
 		z++;
 	if (nptr[z] == '\0')
+	{
+		*error = 1;
 		return (0);
+	}
 	if (nptr[z] == '-' || nptr[z] == '+')
 	{
 		sign = ft_ispositive(nptr[z]);
@@ -45,6 +48,22 @@ int	ft_atoi(const char *nptr)
 	return (i * sign);
 }
 
+int	ft_strict_atoi(const char *nptr, int *error)
+{
+	intmax_t	num;
+
+	*error = 0;
+	num = ft_mount_num(nptr, error);
+	if (*error == 1)
+		return (0);
+	if (num < INT_MIN || num > INT_MAX)
+	{
+		*error = 1;
+		return (0);
+	}
+	return ((int)num);
+}
+
 /*DESCRIPTION
        The  atoi()  function  converts  the  initial  portion of the
        nptring pointed to by nptr to int.
@@ -52,11 +71,12 @@ int	ft_atoi(const char *nptr)
 
 RETURN VALUE
        The converted value.
--------------------------------------------------------------------------------
+-------------------------------------------------------------------------------*
 #include <stdio.h>
 
 int main() 
 {
+	int *error = 0;
 	
     const char *test_cases[] = 
 	{
@@ -72,7 +92,9 @@ int main()
     };
 
     for (int i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); ++i) {
-        int result = ft_atoi(test_cases[i]);
+        int result = ft_atoi(test_cases[i], &error);
+		if (*error == 1)
+			exit (-1);
         printf("Input: \"%s\", Result: %d\n", test_cases[i], result);
     }
 

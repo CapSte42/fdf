@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/23 07:40:34 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:46:56 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef struct s_coordinate
 	float			z;
 }					t_coordinates;
 
-typedef struct	s_data {
+typedef struct s_data
+{
 	void			*img;
 	char			*addr;
 	int				bits_per_pixel;
@@ -37,6 +38,6 @@ typedef struct	s_data {
 	int				endian;
 }					t_data;
 
-void	ft_checkfile(char *file);
-
+char			**ft_checkfile(char *file);
+t_coordinates	**ft_read_coordinate(char ***all_lines);
 #endif

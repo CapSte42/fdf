@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit_error.c                                    :+:      :+:    :+:   */
+/*   ft_fill_coordinates.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 14:49:34 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/31 22:26:32 by smontuor         ###   ########.fr       */
+/*   Created: 2024/01/31 22:45:20 by smontuor          #+#    #+#             */
+/*   Updated: 2024/01/31 22:47:48 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-void	ft_exit_error(char *msg)
+t_coordinates	*ft_read_coordinate(char ***all_lines)
 {
-	ft_perror("%s\n", msg);
-	exit (1);
+	
 }

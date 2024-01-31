@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:59:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/27 16:10:39 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:39:33 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	main(int ac, char **av)
 {
-	t_coordinates	*coordinates;
+	t_coordinates	**coordinates;
+	char			**all_lines;
 
-	ft_checkfile(av[1]);
-/* 		ft_read_coordinate(**coordinates); */
+	all_lines = ft_checkfile(av[1]);
+	coordinates = ft_read_coordinate(all_lines);
 
+	ft_free_n(0, 1, &all_lines);
 }
 

@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:03:03 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/27 18:13:54 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:25:35 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ size_t			ft_strlen(const char *s);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
+char			*ft_freejoin(const char *s1, const char *s2);
 char			*ft_strjoin(const char *s1, const char *s2);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
@@ -64,7 +65,8 @@ char			*ft_strtrim(char const *s1, char const *set);
 /******************************************************************************/
 /*                     Functions inside /stdlib                               */
 /******************************************************************************/
-int				ft_atoi(const char *nptr, int *error);
+int				ft_atoi(const char *nptr);
+int				ft_strict_atoi(const char *nptr, int *error);
 void			*ft_calloc(size_t nmemb, size_t size);
 /******************************************************************************/
 /*                     Functions inside /not_standard                         */
@@ -78,6 +80,7 @@ void			ft_free_matrix(char **matrix);
 int				ft_free_arrays(void **ar1, void **ar2, void **ar3);
 void			ft_exit_error(char *msg);
 int				ft_open_file(const char *file);
+void			ft_free_n(int c_array, int c_matrix, ...);
 /******************************************************************************/
 /*                     Functions inside /list                                 */
 /******************************************************************************/
@@ -115,11 +118,12 @@ int				ft_putunsigned_fd(unsigned int n, int fd);
 int				ft_putptr_fd(uintptr_t ptr, int fd);
 int				ft_puthex_fd(unsigned int num, char format, int fd);
 int				ft_putnbrbase_wrapper_fd(uintptr_t nbr, char *base, int fd);
-int				ft_printf(int fd, const char *format, ...);
 int				ft_isspace(int c);
 /******************************************************************************/
 /*                     Functions inside /ft_printf                            */
 /******************************************************************************/
-int				ft_printf(int fd, const char *format, ...);
+int				ft_printf_fd(int fd, const char *format, ...);
+int				ft_printf(const char *format, ...);
+int				ft_perror(const char *format, ...);
 
 #endif

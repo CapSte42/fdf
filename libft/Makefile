@@ -50,11 +50,14 @@ SRCS = ./ctype/ft_isalnum.c \
 	./not_standard/ft_free_arrays.c \
 	./not_standard/ft_exit_error.c \
 	./not_standard/ft_open_file.c \
+	./not_standard/ft_free_n.c \
 	./stdlib/ft_atoi.c \
+	./stdlib/ft_strict_atoi.c \
 	./stdlib/ft_calloc.c \
 	./string/ft_strchr.c \
 	./string/ft_strdup.c \
 	./string/ft_striteri.c \
+	./string/ft_freejoin.c \
 	./string/ft_strjoin.c \
 	./string/ft_strlcat.c \
 	./string/ft_strlcpy.c \
@@ -64,8 +67,9 @@ SRCS = ./ctype/ft_isalnum.c \
 	./string/ft_strnstr.c \
 	./string/ft_strrchr.c \
 	./string/ft_strtrim.c \
-	./ft_printf/ft_printf.c
-
+	./ft_printf/ft_printf.c \
+	./ft_printf/ft_printf_fd.c \
+	./ft_printf/ft_perror.c
 
 OBJS = $(SRCS:.c=.o)
 

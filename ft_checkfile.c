@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/27 19:58:24 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:50:33 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	is_fdf_file(const char *file)
 
 static int	count_elements(const char *line)
 {
-	int count;
-	int in_element;
-	int i;
+	int	count;
+	int	in_element;
+	int	i;
 
 	if (line == NULL)
 	{
@@ -43,42 +43,38 @@ static int	count_elements(const char *line)
 		{
 			in_element = 1;
 			count++;
-        } else if (line[i] == ' ')
+		} else if (line[i] == ' ')
 		{
 			in_element = 0;
 		}
 		i++;
 	}
-    return (count);
+	return (count);
 }
 
-static void check_consistency(int n_lines, char **all_lines)
+static int	check_consistency(int n_lines, char **all_lines)
 {
 	int	i;
 	int	expected_elements;
 	int	num_elements;
 
 	if (n_lines <= 0 || all_lines == NULL)
-		// Gestisci caso di input non valido
+		ft_exit_error("Something went wrong.");
 	i = 0;
 	expected_elements = count_elements(all_lines[0]);
 	if (expected_elements == -1)
-		// Gestisci l'errore o la riga vuota
+		ft_exit_error("Something went wrong.");
 	i = 1;
 	while (i < n_lines)
 	{
 		num_elements = count_elements(all_lines[i]);
 		if (num_elements != expected_elements)
-		{
-			// Inconsistenza trovata, gestisci come necessario
-			return;
-		}
+			return (0);
 		i++;
 	}
-    // Tutte le righe sono consistenti
 }
 
-void	ft_checkfile(char *file)
+char	**ft_checkfile(char *file)
 {
 	char	**all_lines;
 	int		n_lines;
@@ -89,9 +85,10 @@ void	ft_checkfile(char *file)
 	n_lines = ft_get_all_lines(file, &all_lines);
 	if (n_lines == -1)
 		ft_exit_error("File passed as argument is dumb.");
-	check_consistency(n_lines, all_lines);
-	
+	if (check_consistency(n_lines, all_lines) == 0)
+	{
+		ft_free_n(0, 1, &all_lines);
+		ft_exit_error("Bad map format.");
+	}
+	return (all_lines);
 }
-
-/* devo controllare la coerenza della matrice ottenuta, ossia se e' compatibile con
-una mappa fdf. mi basta controllare che il numero di righe e di colonne sia maggiore 0 */

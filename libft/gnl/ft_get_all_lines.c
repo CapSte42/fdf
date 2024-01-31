@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:43:45 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/27 19:43:21 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:34:27 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,38 +33,8 @@ static ssize_t	count_lines(const char *file)
 	ft_get_next_line(-42);
 	return (i);
 }
-/*
-int	ft_get_all_lines(const char *file, char ***all_lines)
-{
-	int		i;
-	int		fd;
-	char	*line;
 
-	*all_lines = ft_calloc(count_lines(file) + 1, sizeof(char *));
-	if (*all_lines == NULL)
-		return (-2);
-	fd = ft_open_file(file);
-	if (fd < 0)
-	{
-		free(all_lines);
-		return (-2);
-	}
-	line = ft_get_next_line(fd);
-	line = ft_strtrim(line, "\n");
-	i = -1;
-	while (line != NULL)
-	{
-		(*all_lines)[++i] = line;
-		temp_line = ft_get_next_line(fd);
-		line = ft_strtrim(temp_line, "\n");
-		free(temp_line);
-	}
-	close(fd);
-	ft_get_next_line(-42);
-	return (i);
-} */
-
-ssize_t ft_get_all_lines(const char *file, char ***all_lines)
+ssize_t	ft_get_all_lines(const char *file, char ***all_lines)
 {
 	int		fd;
 	char	*all_file_one_line;

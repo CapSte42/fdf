@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:43:45 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/31 22:34:27 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:27:30 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ ssize_t	ft_get_all_lines(const char *file, char ***all_lines)
 	line = ft_get_next_line(fd);
 	while (line != NULL)
 	{
-		all_file_one_line = ft_strjoin(all_file_one_line, line);
+		all_file_one_line = ft_freejoin(all_file_one_line, line);
 		free(line);
 		line = ft_get_next_line(fd);
 	}

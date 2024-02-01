@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fill_coordinates.c                              :+:      :+:    :+:   */
+/*   ft_check_format.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 22:45:20 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:15 by smontuor         ###   ########.fr       */
+/*   Created: 2024/02/01 16:18:58 by smontuor          #+#    #+#             */
+/*   Updated: 2024/02/01 16:24:45 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-t_coordinates	*ft_read_coordinate(char **all_lines)
+void	ft_check_format(const char *file, const char *format)
 {
-	int				x;
-	int				z;
-	t_coordinates	point;
-	t_coordinates	*coordinates;
+	char	*dot;
 
-	if (all_lines == NULL || all_lines[0] == NULL)
-		return (NULL);
-		x == 0;
-	while (all_lines[x])
-	{
-		y = 0
-	}
+	dot = ft_strrchr(file, '.');
+	if (!dot || dot == file)
+		ft_exit_error("Wrong file format.");
+	if (!ft_strncmp(dot, format, 5) == 0)
+		ft_exit_error("Wrong file format.");
 }

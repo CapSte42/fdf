@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:03:03 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/31 22:25:35 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:18:54 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # endif
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1000000
 # endif
 
 typedef struct s_list
@@ -81,6 +81,7 @@ int				ft_free_arrays(void **ar1, void **ar2, void **ar3);
 void			ft_exit_error(char *msg);
 int				ft_open_file(const char *file);
 void			ft_free_n(int c_array, int c_matrix, ...);
+void			ft_check_format(const char *file, const char *format);
 /******************************************************************************/
 /*                     Functions inside /list                                 */
 /******************************************************************************/

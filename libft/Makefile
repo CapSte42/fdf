@@ -51,6 +51,7 @@ SRCS = ./ctype/ft_isalnum.c \
 	./not_standard/ft_exit_error.c \
 	./not_standard/ft_open_file.c \
 	./not_standard/ft_free_n.c \
+	./not_standard/ft_check_format.c \
 	./stdlib/ft_atoi.c \
 	./stdlib/ft_strict_atoi.c \
 	./stdlib/ft_calloc.c \

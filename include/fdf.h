@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/31 22:46:56 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:57:40 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ typedef struct s_data
 }					t_data;
 
 char			**ft_checkfile(char *file);
-t_coordinates	**ft_read_coordinate(char ***all_lines);
+t_coordinates	*ft_read_coordinate(char **all_lines);
 #endif

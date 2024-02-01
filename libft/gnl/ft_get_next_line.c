@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:07:12 by smontuor          #+#    #+#             */
-/*   Updated: 2023/12/20 11:14:19 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:25:46 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	*ft_read_line(int fd, char *remainder)
 		}
 		read_remainder[bytes_read] = '\0';
 		temp_remainder = remainder;
-		remainder = ft_strjoin(temp_remainder, read_remainder);
+		remainder = ft_freejoin(temp_remainder, read_remainder);
 	}
 	free(read_remainder);
 	return (remainder);

@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:03:03 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/01 17:18:54 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:14:21 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <stdio.h>
 # include <stdint.h>
 # include <stdarg.h>
+
+# define GREEN   "\033[1;32m"
+# define RED     "\033[1;31m"
+# define RESET   "\033[0m"
 
 # ifndef FD_MAX
 #  define FD_MAX 4096

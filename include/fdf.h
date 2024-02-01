@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/01 15:57:40 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:49:11 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@
 # include "mlx_int.h"
 # include <math.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define DEFAULT_WIDTH 1920
+# define DEFAULT_HEIGHT 1080
+
 # define BACKGROUND_COLOR 0x00000FF
 # define DRAWING_COLOR 0xFFFFFFFF
+
+# define PI 3.14159265358979323846
 
 typedef struct s_coordinate
 {

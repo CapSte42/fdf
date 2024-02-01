@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:06:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/31 22:23:27 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:10:51 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ft_perror(const char *str, ...)
 	if (!str)
 		return (-1);
 	va_start(args, str);
+	print_length += write(2, RED, sizeof(RED) - 1);
 	while (str && str[i])
 	{
 		if (str[i] == '%')
@@ -56,6 +57,7 @@ int	ft_perror(const char *str, ...)
 			print_length += ft_putchar_fd(str[i], 2);
 		i++;
 	}
+	print_length += write(2, RESET, sizeof(RESET) - 1);
 	va_end(args);
 	return (print_length);
 }

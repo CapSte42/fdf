@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/01 23:16:22 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:08:54 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,32 +64,52 @@ static int	check_consistency(int n_lines, char **all_lines)
 	return (expected_elements);
 }
 
-t_coordinates	*set_coordinates(int n_lines, int elem_in_row, char **all_lines)
+static int	set_line(int last_x, int y, char **all_lines, t_coords *coords)
+{
+	static int	current_i;
+	char**		y_line;
+	char**		current_elem;
+
+	y_line = ft_split(all_lines[y], ' ');
+	while(*y_line)
+	{
+		coords[current_i].x = (int)(current_i / last_x);
+		coords[current_i].y = (int)(current_i % last_x);
+		current_elem = ft_split(*y_line, ',');
+		if (!current_elem)
+			return (ft_free_n(0, 1, y_line), 0);
+		coords[current_i].z = ft_atoi(current_elem[0]);
+		if (current_elem[1] != NULL)
+			coords[current_i].color = current_elem[1]; /* todo color to int hex char* */
+		else
+			ft_free_n(1, 0, &current_elem);
+		y_line++;
+		current_i++;
+	}
+	if (current_i == (last_x * (y + 1)))
+		return (ft_free_n(0, 1, y_line), 1);
+	return (0);
+}
+
+static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 {
 	int				x;
 	int				y;
 	int				i;
-	char			*color;
-	t_coordinates	*coordinates;
+	t_coords		*coords;
 
 	if (n_lines <= 0 || elem_in_row <= 0 || all_lines == NULL)
 		return (NULL);
-	coordinates = malloc(n_lines * elem_in_row * sizeof(t_coordinates));
-	if (!coordinates)
+	coords = ft_calloc(sizeof(t_coords), n_lines * elem_in_row);
+	if (!coords)
 		return (NULL);
 	y = -1;
-	i = -1;
-	while (++y < elem_in_row)
+	while (++y < n_lines)
 	{
-		x = -1;
-		while (++x < n_lines)
-		{
-			coordinates[++i].x = x + 1;
-			coordinates[i].y = y + 1;
-			/*coordinates[i].z =  boia faus sono co. fare split all_lines prima di cercare di assegnarlo*/
-		}
+		if (set_line(elem_in_row, y, all_lines, coords) == 0)
+			return (NULL);
 	}
-
+	return (coords);
 }
 
 char	**ft_checkfile(char *file)
@@ -98,7 +118,7 @@ char	**ft_checkfile(char *file)
 	int				n_lines;
 	int				elem_in_row;
 	char			*dot;
-	t_coordinates	*coordinates;
+	t_coords		*coords;
 
 	if (!file)
 		ft_exit_error("You must be the clever one.");
@@ -112,7 +132,15 @@ char	**ft_checkfile(char *file)
 		ft_free_n(0, 1, &all_lines);
 		ft_exit_error("Bad map format.");
 	}
-	coordinates = set_coordinates(n_lines, elem_in_row, all_lines);
-	ft_perror("%d/%d\n", n_lines, elem_in_row);
+	coords = set_coords(n_lines, elem_in_row, all_lines);
+	if (!coords)
+	{
+		ft_free_n(0, 1, &all_lines);
+		ft_perror("Malloc error in set_coords.");
+	}
+	for(int i = 0; i < n_lines * elem_in_row; i++)
+	{
+		printf("coords.x = %f , coords.y = %f , coords.z = %f , color = %s\n", coords[i].x, coords[i].y, coords[i].z, coords[i].color);
+	}
 	return (all_lines);
 }

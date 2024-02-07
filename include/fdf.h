@@ -27,10 +27,10 @@
 
 typedef struct s_coordinate
 {
-	float			x;
-	float			y;
-	float			z;
-	char*			color;
+	float				x;
+	float				y;
+	float				z;
+	unsigned long int	color;
 }					t_coords;
 
 typedef struct s_data
@@ -42,6 +42,6 @@ typedef struct s_data
 	int				endian;
 }					t_data;
 
-char			**ft_checkfile(char *file);
+int			ft_checkfile(char *file, t_coords **coords);
 t_coords	*ft_read_coordinate(char **all_lines);
 #endif

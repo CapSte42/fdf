@@ -86,6 +86,7 @@ void			ft_exit_error(char *msg);
 int				ft_open_file(const char *file);
 void			ft_free_n(int c_array, int c_matrix, ...);
 void			ft_check_format(const char *file, const char *format);
+int				ft_htoul(const char *s);
 /******************************************************************************/
 /*                     Functions inside /list                                 */
 /******************************************************************************/

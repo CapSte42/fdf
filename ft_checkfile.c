@@ -69,38 +69,37 @@ static int	set_line(int last_x, int y, char **all_lines, t_coords *coords)
 	static int	current_i;
 	char**		y_line;
 	char**		current_elem;
+	int			i;
 
+	i = 0;
 	y_line = ft_split(all_lines[y], ' ');
-	while(*y_line)
+	while(y_line[i] != NULL)
 	{
 		coords[current_i].x = (int)(current_i / last_x);
 		coords[current_i].y = (int)(current_i % last_x);
-		current_elem = ft_split(*y_line, ',');
+		current_elem = ft_split(y_line[i], ',');
 		if (!current_elem)
-			return (ft_free_n(0, 1, y_line), 0);
+			return (ft_free_n(0, 1, &y_line), 0);
 		coords[current_i].z = ft_atoi(current_elem[0]);
 		if (current_elem[1] != NULL)
-			coords[current_i].color = current_elem[1]; /* todo color to int hex char* */
-		else
-			ft_free_n(1, 0, &current_elem);
-		y_line++;
+			coords[current_i].color = ft_htoul(current_elem[1]);
+		ft_free_n(0, 1, &current_elem);
+		i++;
 		current_i++;
 	}
-	if (current_i == (last_x * (y + 1)))
-		return (ft_free_n(0, 1, y_line), 1);
-	return (0);
+	return (ft_free_n(0, 1, &y_line), current_i == (last_x * (y + 1)));
 }
 
 static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 {
-	int				x;
 	int				y;
 	int				i;
+	int				tot_punti;
 	t_coords		*coords;
 
 	if (n_lines <= 0 || elem_in_row <= 0 || all_lines == NULL)
 		return (NULL);
-	coords = ft_calloc(sizeof(t_coords), n_lines * elem_in_row);
+	coords = ft_calloc(sizeof(t_coords), n_lines * elem_in_row + 1);
 	if (!coords)
 		return (NULL);
 	y = -1;
@@ -109,16 +108,22 @@ static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 		if (set_line(elem_in_row, y, all_lines, coords) == 0)
 			return (NULL);
 	}
+	i = 0;
+	tot_punti = n_lines * elem_in_row;
+	while (i < tot_punti)
+	{
+		if (coords[i].color == 0)
+			coords[i].color = DRAWING_COLOR;
+		i++;
+	}
 	return (coords);
 }
 
-char	**ft_checkfile(char *file)
+int	ft_checkfile(char *file, t_coords **coords)
 {
 	char			**all_lines;
 	int				n_lines;
 	int				elem_in_row;
-	char			*dot;
-	t_coords		*coords;
 
 	if (!file)
 		ft_exit_error("You must be the clever one.");
@@ -132,15 +137,12 @@ char	**ft_checkfile(char *file)
 		ft_free_n(0, 1, &all_lines);
 		ft_exit_error("Bad map format.");
 	}
-	coords = set_coords(n_lines, elem_in_row, all_lines);
+	*coords = set_coords(n_lines, elem_in_row, all_lines);
 	if (!coords)
 	{
 		ft_free_n(0, 1, &all_lines);
 		ft_perror("Malloc error in set_coords.");
 	}
-	for(int i = 0; i < n_lines * elem_in_row; i++)
-	{
-		printf("coords.x = %f , coords.y = %f , coords.z = %f , color = %s\n", coords[i].x, coords[i].y, coords[i].z, coords[i].color);
-	}
-	return (all_lines);
+	ft_free_n(0, 1, &all_lines);
+	return (n_lines * elem_in_row);
 }

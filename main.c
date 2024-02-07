@@ -15,14 +15,17 @@
 int	main(int ac, char **av)
 {
 	t_coords	*coords;
-	char			**all_lines;
-	int	test;
+	int	tot_punti;
 
 	if (ac != 2)
 		ft_exit_error("Yeah. Whatever.");
-	all_lines = ft_checkfile(av[1]);
-	//coords = ft_read_coordinate(all_lines);
+	tot_punti = ft_checkfile(av[1], &coords);
 
-	ft_free_n(0, 1, &all_lines);
+	for(int i = 0; i < tot_punti; i++)
+	{
+		printf("coords.x = %f , coords.y = %f , coords.z = %f , color = %ld\n", coords[i].x, coords[i].y, coords[i].z, coords[i].color);
+	}
+
+	ft_free_n(1, 0, &coords);
 }
 

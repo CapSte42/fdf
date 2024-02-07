@@ -27,8 +27,8 @@
 
 typedef struct s_coordinate
 {
-	float				x;
-	float				y;
+	int				x;
+	int				y;
 	float				z;
 	unsigned long int	color;
 }					t_coords;

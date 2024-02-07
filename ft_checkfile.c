@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/06 14:08:54 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:34:33 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,30 +119,28 @@ static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 	return (coords);
 }
 
-int	ft_checkfile(char *file, t_coords **coords)
+void	ft_checkfile(char *file, t_fdf *fdf)
 {
 	char			**all_lines;
-	int				n_lines;
-	int				elem_in_row;
 
 	if (!file)
 		ft_exit_error("You must be the clever one.");
 	ft_check_format(file, ".fdf");
-	n_lines = ft_get_all_lines(file, &all_lines);
-	if (n_lines == -1)
+	fdf->tot_colonna = ft_get_all_lines(file, &all_lines);
+	if (fdf->tot_colonna == -1)
 		ft_exit_error("File passed as argument is dumb.");
-	elem_in_row = check_consistency(n_lines, all_lines);
-	if (elem_in_row == 0)
+	fdf->tot_riga = check_consistency(fdf->tot_colonna, all_lines);
+	if (fdf->tot_riga == 0)
 	{
 		ft_free_n(0, 1, &all_lines);
 		ft_exit_error("Bad map format.");
 	}
-	*coords = set_coords(n_lines, elem_in_row, all_lines);
-	if (!coords)
+	fdf->coords = set_coords(fdf->tot_colonna, fdf->tot_riga, all_lines);
+	if (!fdf->coords)
 	{
 		ft_free_n(0, 1, &all_lines);
-		ft_perror("Malloc error in set_coords.");
+		ft_exit_error("Malloc error in set_coords.");
 	}
 	ft_free_n(0, 1, &all_lines);
-	return (n_lines * elem_in_row);
+	fdf->name = ft_strdup(file);
 }

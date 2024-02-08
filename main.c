@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:59:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/07 16:31:01 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:47:29 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	main(int ac, char **av)
 		ft_exit_error("Yeah. Whatever.");
 	ft_checkfile(av[1], &fdf);
 	fdf.tot_punti = fdf.tot_colonna * fdf.tot_riga;
-/*........................*/
 	int i = 0;
+/*------------------------------------------------*/
 	for(int y = 0; y < fdf.tot_riga; y++)
 	{
 		for(int x = 0; x < fdf.tot_colonna; x++)
@@ -49,21 +49,44 @@ int	main(int ac, char **av)
 			i++;
 		}
 	}
+	printf("tot_colonna = %d , tot_riga = %d , tot_punti = %d\n", fdf.tot_colonna, fdf.tot_riga, fdf.tot_punti);
+
+/*------------------------------------------------*/
 	fdf.mlx = mlx_init();
-	fdf.mlx_win = mlx_new_window(fdf.mlx, 1920, 1080, fdf.name);
-	fdf.img.img = mlx_new_image(fdf.mlx, 1920, 1080);
-	fdf.img.addr = mlx_get_data_addr(fdf.img.img, &fdf.img.bits_per_pixel, &fdf.img.line_length,
-									&fdf.img.endian);
+	fdf.mlx_win = mlx_new_window(fdf.mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT, fdf.name);
+	fdf.img.img = mlx_new_image(fdf.mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	fdf.img.addr = mlx_get_data_addr(fdf.img.img, &fdf.img.bits_per_pixel, &fdf.img.line_length, &fdf.img.endian);
 	int zoom;
-	if (1920 / fdf.tot_riga > 1080 / fdf.tot_colonna)
-		zoom = 1080 / fdf.tot_riga;
-	else
-		zoom = 1920 / fdf.tot_colonna;
-	zoom /= 10;
-	for(int i = 0; i < fdf.tot_punti; i++)
-	{
-		my_mlx_pixel_put(&fdf.img, fdf.coords[i].y + (fdf.coords[i].y * zoom), fdf.coords[i].x + (fdf.coords[i].x * zoom), fdf.coords[i].color);
-	}
+	zoom = 20;
+	i = 0;
+	t_coords start;
+	t_coords end;
+
+	start.color = 0x00FF0000;
+	end.color = 0x00FF0000;
+
+for (i = 0; i < fdf.tot_punti; i++)
+{
+    // Draw line to the next point in the same row
+    if (fdf.coords[i].x == fdf.coords[i+1].x) // Check if there is a next point in the same row
+    {
+        start.x = fdf.coords[i].x * zoom;
+        start.y = fdf.coords[i].y * zoom;
+        end.x = fdf.coords[i+1].x * zoom;
+        end.y = fdf.coords[i+1].y * zoom;
+        bresenham(&fdf.img, &start, &end);
+    }
+
+
+    if (i < 32) // Check if there is a next row
+    {
+        start.x = fdf.coords[i].x * zoom;
+        start.y = fdf.coords[i].y * zoom;
+        end.x = fdf.coords[i+fdf.tot_colonna].x * zoom;
+        end.y = fdf.coords[i+fdf.tot_colonna].y * zoom;
+        bresenham(&fdf.img, &start, &end);
+    }
+}
 	mlx_put_image_to_window(fdf.mlx, fdf.mlx_win, fdf.img.img, 100, 100);
 	mlx_hook(fdf.mlx_win, DestroyNotify, StructureNotifyMask, ft_cool_exit, &fdf);
 	mlx_loop(fdf.mlx);

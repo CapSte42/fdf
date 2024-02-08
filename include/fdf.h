@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/07 14:32:13 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:29:55 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,31 @@ typedef struct s_fdf
 	t_data				img;
 }						t_fdf;
 
+
+typedef struct s_bres
+{
+	int					x0;
+	int					y0;
+	int					x1;
+	int					y1;
+	int					steep;
+	int					xpxl1;
+	int					ypxl1;
+	int					xpxl2;
+	int					ypxl2;
+	float				dx;
+	float				dy;
+	float				gradient;
+	float				xend;
+	float				yend;
+	float				xgap;
+	float				intery;
+}						t_bres;
+
 void		ft_checkfile(char *file, t_fdf *fdf);
 t_coords	*ft_read_coordinate(char **all_lines);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void 		bresenham(t_data *data, t_coords *start, t_coords *end);
+/* void	draw_line(t_data *data, t_wu *wu, int color1, int color2); */
+
 #endif

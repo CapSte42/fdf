@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 13:22:02 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:51:13 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define DEFAULT_HEIGHT 1080
 
 # define BACKGROUND_COLOR 0x00000FF
-# define DRAWING_COLOR 0xFFFFFFFF
+# define DRAWING_COLOR 0x80FFFFFF
 
 # define PI 3.14159265358979323846
 
@@ -30,6 +30,8 @@ typedef struct s_coords
 	int					x;
 	int					y;
 	float				z;
+	float				iso_x;
+	float				iso_y;
 	unsigned long int	color;
 }						t_coords;
 
@@ -42,9 +44,17 @@ typedef struct s_data
 	int					endian;
 }						t_data;
 
+typedef struct s_zoom
+{
+    int					center_x;
+    int					center_y;
+    int					scaling;
+}						t_zoom;
+
 typedef struct s_fdf
 {
 	t_coords			*coords;
+	t_zoom				zoom;
 	int					x_axis;
 	int					y_axis;
 	int					index;
@@ -55,32 +65,40 @@ typedef struct s_fdf
 }						t_fdf;
 
 
-typedef struct s_bres
+typedef struct s_draw
 {
 	int					x0;
 	int					y0;
 	int					x1;
 	int					y1;
-	int					steep;
-	int					xpxl1;
-	int					ypxl1;
-	int					xpxl2;
-	int					ypxl2;
-	float				dx;
-	float				dy;
-	float				gradient;
-	float				xend;
-	float				yend;
-	float				xgap;
-	float				intery;
-}						t_bres;
+	int					startColor;
+	int					endColor;
+	int					dx;
+	int					dy;
+	int					sx;
+	int					sy;
+	int					err;
+	int					e2;
+	int					currentColor;
+	int					startR;
+	int					startG;
+	int					startB;
+	int					endR;
+	int					endG;
+	int					endB;
+	int					steps;
+	float				colorStepR;
+	float				colorStepG;
+	float				colorStepB;
+	float				currentR;
+	float				currentG;
+	float				currentB;
+}						t_draw;
 
 void		ft_checkfile(char *file, t_fdf *fdf);
 t_coords	*ft_read_coordinate(char **all_lines);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void 		bresenham(t_data *data, t_coords *start, t_coords *end);
-/* void	draw_line(t_data *data, t_wu *wu, int color1, int color2); */
-void drawline(t_fdf *fdf, int x0, int y0, int x1, int y1, int startColor, int endColor);
-void	print_coords(t_fdf *fdf);
+void		drawline(t_fdf *fdf, t_coords start, t_coords end);
+void		print_coords(t_fdf *fdf);
 
 #endif

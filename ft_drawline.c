@@ -1,49 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_drawline.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/11 15:54:56 by smontuor          #+#    #+#             */
+/*   Updated: 2024/02/11 20:38:52 by smontuor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-int max(int a, int b) {
-    return (a > b) ? a : b;
+static void	set_coords_and_colors(t_draw *draw, t_coords start, t_coords end)
+{
+	draw->x0 = start.iso_x;
+	draw->y0 = start.iso_y;
+	draw->x1 = end.iso_x;
+	draw->y1 = end.iso_y;
+	draw->startColor = start.color;
+	draw->endColor = end.color;
+	draw->startR = (draw->startColor >> 16) & 0xFF;
+	draw->startG = (draw->startColor >> 8) & 0xFF;
+	draw->startB = draw->startColor & 0xFF;
+	draw->endR = (draw->endColor >> 16) & 0xFF;
+	draw->endG = (draw->endColor >> 8) & 0xFF;
+	draw->endB = draw->endColor & 0xFF;
+	draw->currentR = draw->startR;
+	draw->currentG = draw->startG;
+	draw->currentB = draw->startB;
 }
 
-void drawline(t_fdf *fdf, int x0, int y0, int x1, int y1, int startColor, int endColor) {
-    int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-    int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-    int err = dx + dy, e2; // errore di valore doppio dx dy
-    int currentColor = startColor;
+static void	calculate_drawing_params(t_draw *draw)
+{
+	draw->dx = abs(draw->x1 - draw->x0);
+	if (draw->x0 < draw->x1)
+		draw->sx = 1;
+	else
+		draw->sx = -1;
+	draw->dy = -abs(draw->y1 - draw->y0);
+	if (draw->y0 < draw->y1)
+		draw->sy = 1;
+	else
+		draw->sy = -1;
+	draw->err = draw->dx + draw->dy;
+	draw->e2 = 0;
+	draw->steps = fmax(abs(draw->x1 - draw->x0), abs(draw->y1 - draw->y0));
+	draw->colorStepR = (float)(draw->endR - draw->startR) / draw->steps;
+	draw->colorStepG = (float)(draw->endG - draw->startG) / draw->steps;
+	draw->colorStepB = (float)(draw->endB - draw->startB) / draw->steps;
+}
 
-    // Estrai i componenti RGB dai colori di inizio e fine
-    int startR = (startColor >> 16) & 0xFF;
-    int startG = (startColor >> 8) & 0xFF;
-    int startB = startColor & 0xFF;
+static void	set_draw(t_draw *draw, t_coords start, t_coords end)
+{
+	set_coords_and_colors(draw, start, end);
+	calculate_drawing_params(draw);
+}
 
-    int endR = (endColor >> 16) & 0xFF;
-    int endG = (endColor >> 8) & 0xFF;
-    int endB = endColor & 0xFF;
+static void	set_current_color(t_draw *draw)
+{
+	draw->currentColor = ((int)draw->currentR << 16)
+		| ((int)draw->currentG << 8)
+		| (int)draw->currentB;
+}
 
-    // Calcola il numero di passi e il gradiente di colore
-    int steps = max(abs(x1 - x0), abs(y1 - y0));
-    float colorStepR = (float)(endR - startR) / steps;
-    float colorStepG = (float)(endG - startG) / steps;
-    float colorStepB = (float)(endB - startB) / steps;
-    float currentR = startR, currentG = startG, currentB = startB;
+void	drawline(t_fdf *fdf, t_coords start, t_coords end)
+{
+	t_draw	draw;
 
-    for (;;) {
-        // Imposta il colore corrente basato sui valori RGB calcolati
-        currentColor = ((int)currentR << 16) | ((int)currentG << 8) | (int)currentB;
-        my_mlx_pixel_put(&fdf->img, x0, y0, currentColor);
-
-        if (x0 == x1 && y0 == y1) break;
-        e2 = 2 * err;
-        if (e2 >= dy) { err += dy; x0 += sx; }
-        if (e2 <= dx) { err += dx; y0 += sy; }
-
-        // Aggiorna i valori RGB per il prossimo pixel
-        currentR += colorStepR;
-        currentG += colorStepG;
-        currentB += colorStepB;
-
-        // Assicurati che i valori RGB rimangano nei limiti
-        currentR = fmax(0, fmin(255, currentR));
-        currentG = fmax(0, fmin(255, currentG));
-        currentB = fmax(0, fmin(255, currentB));
-    }
+	set_draw(&draw, start, end);
+	while (!(draw.x0 == draw.x1 && draw.y0 == draw.y1))
+	{
+		set_current_color(&draw);
+		my_mlx_pixel_put(&fdf->img, draw.x0, draw.y0, draw.currentColor);
+		draw.e2 = 2 * draw.err;
+		if (draw.e2 >= draw.dy)
+		{
+			draw.err += draw.dy;
+			draw.x0 += draw.sx;
+		}
+		if (draw.e2 <= draw.dx)
+		{
+			draw.err += draw.dx;
+			draw.y0 += draw.sy;
+		}
+		draw.currentR += draw.colorStepR;
+		draw.currentG += draw.colorStepG;
+		draw.currentB += draw.colorStepB;
+		draw.currentR = fmax(0, fmin(255, draw.currentR));
+		draw.currentG = fmax(0, fmin(255, draw.currentG));
+		draw.currentB = fmax(0, fmin(255, draw.currentB));
+	}
 }

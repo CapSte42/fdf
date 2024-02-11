@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 13:28:22 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:19:13 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ static int	check_consistency(int n_lines, char **all_lines)
 static int	set_line(int last_x, int y, char **all_lines, t_coords *coords)
 {
 	static int	current_i;
-	char**		y_line;
-	char**		current_elem;
+	char		**y_line;
+	char		**current_elem;
 	int			i;
 
 	i = 0;
 	y_line = ft_split(all_lines[y], ' ');
-	while(y_line[i] != NULL)
+	while (y_line[i] != NULL)
 	{
 		coords[current_i].x = (int)(current_i % last_x);
 		coords[current_i].y = (int)(current_i / last_x);
@@ -83,6 +83,7 @@ static int	set_line(int last_x, int y, char **all_lines, t_coords *coords)
 		coords[current_i].z = ft_atoi(current_elem[0]);
 		if (current_elem[1] != NULL)
 			coords[current_i].color = ft_htoul(current_elem[1]);
+		
 		ft_free_n(0, 1, &current_elem);
 		i++;
 		current_i++;
@@ -143,4 +144,5 @@ void	ft_checkfile(char *file, t_fdf *fdf)
 	}
 	ft_free_n(0, 1, &all_lines);
 	fdf->name = ft_strdup(file);
+	fdf->index = fdf->x_axis * fdf->y_axis;
 }

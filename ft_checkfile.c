@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 10:56:51 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:28:22 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 
 	if (n_lines <= 0 || elem_in_row <= 0 || all_lines == NULL)
 		return (NULL);
-	coords = ft_calloc(sizeof(t_coords), n_lines * elem_in_row + 1);
+	coords = ft_calloc(sizeof(t_coords), n_lines * elem_in_row);
 	if (!coords)
 		return (NULL);
 	y = -1;

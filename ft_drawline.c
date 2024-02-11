@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 15:54:56 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 20:38:52 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:20:12 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static void	set_coords_and_colors(t_draw *draw, t_coords start, t_coords end)
 	draw->y0 = start.iso_y;
 	draw->x1 = end.iso_x;
 	draw->y1 = end.iso_y;
-	draw->startColor = start.color;
-	draw->endColor = end.color;
-	draw->startR = (draw->startColor >> 16) & 0xFF;
-	draw->startG = (draw->startColor >> 8) & 0xFF;
-	draw->startB = draw->startColor & 0xFF;
-	draw->endR = (draw->endColor >> 16) & 0xFF;
-	draw->endG = (draw->endColor >> 8) & 0xFF;
-	draw->endB = draw->endColor & 0xFF;
-	draw->currentR = draw->startR;
-	draw->currentG = draw->startG;
-	draw->currentB = draw->startB;
+	draw->start_color = start.color;
+	draw->end_color = end.color;
+	draw->start_r = (draw->start_color >> 16) & 0xFF;
+	draw->start_g = (draw->start_color >> 8) & 0xFF;
+	draw->start_b = draw->start_color & 0xFF;
+	draw->end_r = (draw->end_color >> 16) & 0xFF;
+	draw->end_g = (draw->end_color >> 8) & 0xFF;
+	draw->end_b = draw->end_color & 0xFF;
+	draw->current_r = draw->start_r;
+	draw->current_g = draw->start_g;
+	draw->current_b = draw->start_b;
 }
 
 static void	calculate_drawing_params(t_draw *draw)
@@ -46,9 +46,9 @@ static void	calculate_drawing_params(t_draw *draw)
 	draw->err = draw->dx + draw->dy;
 	draw->e2 = 0;
 	draw->steps = fmax(abs(draw->x1 - draw->x0), abs(draw->y1 - draw->y0));
-	draw->colorStepR = (float)(draw->endR - draw->startR) / draw->steps;
-	draw->colorStepG = (float)(draw->endG - draw->startG) / draw->steps;
-	draw->colorStepB = (float)(draw->endB - draw->startB) / draw->steps;
+	draw->color_step_r = (float)(draw->end_r - draw->start_r) / draw->steps;
+	draw->color_step_g = (float)(draw->end_g - draw->start_g) / draw->steps;
+	draw->color_step_b = (float)(draw->end_b - draw->start_b) / draw->steps;
 }
 
 static void	set_draw(t_draw *draw, t_coords start, t_coords end)
@@ -59,9 +59,9 @@ static void	set_draw(t_draw *draw, t_coords start, t_coords end)
 
 static void	set_current_color(t_draw *draw)
 {
-	draw->currentColor = ((int)draw->currentR << 16)
-		| ((int)draw->currentG << 8)
-		| (int)draw->currentB;
+	draw->current_color = ((int)draw->current_r << 16)
+		| ((int)draw->current_g << 8)
+		| (int)draw->current_b;
 }
 
 void	drawline(t_fdf *fdf, t_coords start, t_coords end)
@@ -72,7 +72,7 @@ void	drawline(t_fdf *fdf, t_coords start, t_coords end)
 	while (!(draw.x0 == draw.x1 && draw.y0 == draw.y1))
 	{
 		set_current_color(&draw);
-		my_mlx_pixel_put(&fdf->img, draw.x0, draw.y0, draw.currentColor);
+		my_mlx_pixel_put(&fdf->img, draw.x0, draw.y0, draw.current_color);
 		draw.e2 = 2 * draw.err;
 		if (draw.e2 >= draw.dy)
 		{
@@ -84,11 +84,11 @@ void	drawline(t_fdf *fdf, t_coords start, t_coords end)
 			draw.err += draw.dx;
 			draw.y0 += draw.sy;
 		}
-		draw.currentR += draw.colorStepR;
-		draw.currentG += draw.colorStepG;
-		draw.currentB += draw.colorStepB;
-		draw.currentR = fmax(0, fmin(255, draw.currentR));
-		draw.currentG = fmax(0, fmin(255, draw.currentG));
-		draw.currentB = fmax(0, fmin(255, draw.currentB));
+		draw.current_r += draw.color_step_r;
+		draw.current_g += draw.color_step_g;
+		draw.current_b += draw.color_step_b;
+		draw.current_r = fmax(0, fmin(255, draw.current_r));
+		draw.current_g = fmax(0, fmin(255, draw.current_g));
+		draw.current_b = fmax(0, fmin(255, draw.current_b));
 	}
 }

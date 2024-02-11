@@ -1,1 +1,2 @@
-gcc main.c ft_checkfile.c debug_utils.c ft_drawline.c -Lminilibx-linux -lmlx -lX11 -lXext -lm ./libft/libft.a -I./include
+
+cc -Werror -Wextra -Wall *.c -Lminilibx-linux -lmlx -lX11 -lXext -lm ./libft/libft.a -I./include

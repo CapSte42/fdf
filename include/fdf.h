@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 20:51:13 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:35:08 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ typedef struct s_data
 
 typedef struct s_zoom
 {
-    int					center_x;
-    int					center_y;
-    int					scaling;
+	int					center_x;
+	int					center_y;
+	int					scaling;
 }						t_zoom;
 
 typedef struct s_fdf
@@ -64,41 +64,53 @@ typedef struct s_fdf
 	t_data				img;
 }						t_fdf;
 
-
 typedef struct s_draw
 {
 	int					x0;
 	int					y0;
 	int					x1;
 	int					y1;
-	int					startColor;
-	int					endColor;
+	int					start_color;
+	int					end_color;
 	int					dx;
 	int					dy;
 	int					sx;
 	int					sy;
 	int					err;
 	int					e2;
-	int					currentColor;
-	int					startR;
-	int					startG;
-	int					startB;
-	int					endR;
-	int					endG;
-	int					endB;
+	int					current_color;
+	int					start_r;
+	int					start_g;
+	int					start_b;
+	int					end_r;
+	int					end_g;
+	int					end_b;
 	int					steps;
-	float				colorStepR;
-	float				colorStepG;
-	float				colorStepB;
-	float				currentR;
-	float				currentG;
-	float				currentB;
+	float				color_step_r;
+	float				color_step_g;
+	float				color_step_b;
+	float				current_r;
+	float				current_g;
+	float				current_b;
 }						t_draw;
 
 void		ft_checkfile(char *file, t_fdf *fdf);
 t_coords	*ft_read_coordinate(char **all_lines);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		set_zoom_and_center(t_fdf *fdf);
+void		int_to_isometric_pixel(t_fdf *info);
 void		drawline(t_fdf *fdf, t_coords start, t_coords end);
+/*
+ *
+ *
+ *
+*/
+int		ft_cool_exit(t_fdf *fdf);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	ft_start_mlx(t_fdf *fdf);
+/*
+ *
+ *
+ *
+*/
 void		print_coords(t_fdf *fdf);
-
 #endif

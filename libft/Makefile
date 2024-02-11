@@ -24,6 +24,7 @@ SRCS = ./ctype/ft_isalnum.c \
 	./ft_fd/ft_putunsigned_fd.c \
 	./ft_fd/ft_puthex_fd.c \
 	./ft_fd/ft_putptr_fd.c \
+	./ft_fd/ft_putfloat_fd.c \
 	./gnl/ft_get_next_line.c \
 	./gnl/ft_get_all_lines.c \
 	./list/ft_lstadd_back.c \

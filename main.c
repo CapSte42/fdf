@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:59:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/08 19:47:29 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:12:02 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,9 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_exit_error("Yeah. Whatever.");
 	ft_checkfile(av[1], &fdf);
-	fdf.tot_punti = fdf.tot_colonna * fdf.tot_riga;
-	int i = 0;
+	fdf.index = fdf.y_axis * fdf.x_axis;
 /*------------------------------------------------*/
-	for(int y = 0; y < fdf.tot_riga; y++)
-	{
-		for(int x = 0; x < fdf.tot_colonna; x++)
-		{
-			printf("coords.x = %d , coords.y = %d , coords.z = %f , color = %ld\n", fdf.coords[i].x, fdf.coords[i].y, fdf.coords[i].z, fdf.coords[i].color);
-			i++;
-		}
-	}
-	printf("tot_colonna = %d , tot_riga = %d , tot_punti = %d\n", fdf.tot_colonna, fdf.tot_riga, fdf.tot_punti);
-
+	print_coords(&fdf);
 /*------------------------------------------------*/
 	fdf.mlx = mlx_init();
 	fdf.mlx_win = mlx_new_window(fdf.mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT, fdf.name);
@@ -62,32 +52,34 @@ int	main(int ac, char **av)
 	t_coords start;
 	t_coords end;
 
-	start.color = 0x00FF0000;
-	end.color = 0x00FF0000;
+	// start.color = 0x00FF0000;
+	// end.color = 0x00FF0000;
 
-for (i = 0; i < fdf.tot_punti; i++)
-{
-    // Draw line to the next point in the same row
-    if (fdf.coords[i].x == fdf.coords[i+1].x) // Check if there is a next point in the same row
-    {
-        start.x = fdf.coords[i].x * zoom;
-        start.y = fdf.coords[i].y * zoom;
-        end.x = fdf.coords[i+1].x * zoom;
-        end.y = fdf.coords[i+1].y * zoom;
-        bresenham(&fdf.img, &start, &end);
-    }
+	while (i < fdf.index) {
+    	start.x = fdf.coords[i].x * zoom;
+    	start.y = fdf.coords[i].y * zoom;
+		start.color = fdf.coords[i].color;
 
+    // Disegna linea orizzontale se non siamo all'ultimo punto sull'asse X
+    	if (i % fdf.x_axis != fdf.x_axis - 1) {
+    	    end.x = fdf.coords[i + 1].x * zoom;
+    	    end.y = start.y; // Mantieni end.y uguale a start.y per una linea orizzontale
+			end.color = fdf.coords[i + 1].color;
+    	    drawline(&fdf, start.x, start.y, end.x, end.y, start.color, end.color);
+    	}
 
-    if (i < 32) // Check if there is a next row
-    {
-        start.x = fdf.coords[i].x * zoom;
-        start.y = fdf.coords[i].y * zoom;
-        end.x = fdf.coords[i+fdf.tot_colonna].x * zoom;
-        end.y = fdf.coords[i+fdf.tot_colonna].y * zoom;
-        bresenham(&fdf.img, &start, &end);
-    }
-}
-	mlx_put_image_to_window(fdf.mlx, fdf.mlx_win, fdf.img.img, 100, 100);
+    	// Disegna linea verticale se non siamo all'ultima riga
+    	if (i < fdf.index - fdf.x_axis) {
+    	    end.x = start.x; // Mantieni end.x uguale a start.x per una linea verticale
+    	    end.y = fdf.coords[i + fdf.x_axis].y * zoom;
+			end.color = fdf.coords[i + fdf.x_axis].color;
+    	    drawline(&fdf, start.x, start.y, end.x, end.y, start.color, end.color);
+    	}
+
+    	i++;
+	}
+
+	mlx_put_image_to_window(fdf.mlx, fdf.mlx_win, fdf.img.img, 0, 0);
 	mlx_hook(fdf.mlx_win, DestroyNotify, StructureNotifyMask, ft_cool_exit, &fdf);
 	mlx_loop(fdf.mlx);
 	return (0);

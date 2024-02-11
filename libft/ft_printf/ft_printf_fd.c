@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:06:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/01/31 22:20:31 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:05:28 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	ft_formats(va_list args, const char format, int fd)
 		print_length += ft_puthex_fd(va_arg(args, unsigned int), format, fd);
 	else if (format == 'p')
 		print_length += ft_putptr_fd(va_arg(args, uintptr_t), fd);
+	else if (format == 'f')
+		print_length += ft_putfloat_fd(va_arg(args, double), fd);
 	else if (format == '%')
 		print_length += ft_putchar_fd('%', fd);
 	return (print_length);

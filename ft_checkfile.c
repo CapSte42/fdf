@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/08 16:20:29 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 10:56:51 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static int	set_line(int last_x, int y, char **all_lines, t_coords *coords)
 	y_line = ft_split(all_lines[y], ' ');
 	while(y_line[i] != NULL)
 	{
-		coords[current_i].x = (int)(current_i / last_x);
-		coords[current_i].y = (int)(current_i % last_x);
+		coords[current_i].x = (int)(current_i % last_x);
+		coords[current_i].y = (int)(current_i / last_x);
 		current_elem = ft_split(y_line[i], ',');
 		if (!current_elem)
 			return (ft_free_n(0, 1, &y_line), 0);
@@ -94,7 +94,7 @@ static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 {
 	int				y;
 	int				i;
-	int				tot_punti;
+	int				index;
 	t_coords		*coords;
 
 	if (n_lines <= 0 || elem_in_row <= 0 || all_lines == NULL)
@@ -109,8 +109,8 @@ static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 			return (NULL);
 	}
 	i = 0;
-	tot_punti = n_lines * elem_in_row;
-	while (i < tot_punti)
+	index = n_lines * elem_in_row;
+	while (i < index)
 	{
 		if (coords[i].color == 0)
 			coords[i].color = DRAWING_COLOR;
@@ -126,16 +126,16 @@ void	ft_checkfile(char *file, t_fdf *fdf)
 	if (!file)
 		ft_exit_error("You must be the clever one.");
 	ft_check_format(file, ".fdf");
-	fdf->tot_colonna = ft_get_all_lines(file, &all_lines);
-	if (fdf->tot_colonna == -1)
+	fdf->y_axis = ft_get_all_lines(file, &all_lines);
+	if (fdf->y_axis == -1)
 		ft_exit_error("File passed as argument is dumb.");
-	fdf->tot_riga = check_consistency(fdf->tot_colonna, all_lines);
-	if (fdf->tot_riga == 0)
+	fdf->x_axis = check_consistency(fdf->y_axis, all_lines);
+	if (fdf->x_axis == 0)
 	{
 		ft_free_n(0, 1, &all_lines);
 		ft_exit_error("Bad map format.");
 	}
-	fdf->coords = set_coords(fdf->tot_colonna, fdf->tot_riga, all_lines);
+	fdf->coords = set_coords(fdf->y_axis, fdf->x_axis, all_lines);
 	if (!fdf->coords)
 	{
 		ft_free_n(0, 1, &all_lines);

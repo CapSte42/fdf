@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:03:03 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/01 21:14:21 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:00:47 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char			**ft_split(char const *s, char c);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_uitoa(unsigned int n);
 int				ft_issign(int c);
+int				ft_isspace(int c);
 void			ft_free_matrix(char **matrix);
 int				ft_free_arrays(void **ar1, void **ar2, void **ar3);
 void			ft_exit_error(char *msg);
@@ -124,7 +125,7 @@ int				ft_putunsigned_fd(unsigned int n, int fd);
 int				ft_putptr_fd(uintptr_t ptr, int fd);
 int				ft_puthex_fd(unsigned int num, char format, int fd);
 int				ft_putnbrbase_wrapper_fd(uintptr_t nbr, char *base, int fd);
-int				ft_isspace(int c);
+int				ft_putfloat_fd(double f, int fd);
 /******************************************************************************/
 /*                     Functions inside /ft_printf                            */
 /******************************************************************************/

@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:35:08 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:54:29 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void		ft_checkfile(char *file, t_fdf *fdf);
 t_coords	*ft_read_coordinate(char **all_lines);
 void		set_zoom_and_center(t_fdf *fdf);
 void		int_to_isometric_pixel(t_fdf *info);
+void		int_to_perspective_projection(t_fdf *fdf);
 void		drawline(t_fdf *fdf, t_coords start, t_coords end);
 /*
  *

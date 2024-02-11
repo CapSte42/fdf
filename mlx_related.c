@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:28:33 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:29:03 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:44:37 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,19 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	if (x >= 0 && x < DEFAULT_WIDTH && y >= 0 && y < DEFAULT_HEIGHT)
 	{
-		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-		*(unsigned int*)dst = (unsigned int)color;
+		dst = data->addr
+			+ (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = (unsigned int)color;
 	}
 }
 
 void	ft_start_mlx(t_fdf *fdf)
 {
 	fdf->mlx = mlx_init();
-	fdf->mlx_win = mlx_new_window(fdf->mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT, fdf->name);
-	fdf->img.img = mlx_new_image(fdf->mlx, DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	fdf->img.addr = mlx_get_data_addr(fdf->img.img, &fdf->img.bits_per_pixel, &fdf->img.line_length, &fdf->img.endian);
+	fdf->mlx_win = mlx_new_window(fdf->mlx, DEFAULT_WIDTH,
+			DEFAULT_HEIGHT, fdf->name);
+	fdf->img.img = mlx_new_image(fdf->mlx, DEFAULT_WIDTH,
+			DEFAULT_HEIGHT);
+	fdf->img.addr = mlx_get_data_addr(fdf->img.img, &fdf->img.bits_per_pixel,
+			&fdf->img.line_length, &fdf->img.endian);
 }

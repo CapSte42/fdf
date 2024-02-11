@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:49:34 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/01 21:11:58 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:32:41 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_exit_error(char *msg)
 {
-	ft_perror("< %s >\n",msg);
+	ft_perror("< %s >\n", msg);
 	exit (1);
 }

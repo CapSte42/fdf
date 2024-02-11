@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 12:30:02 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:22:02 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void 		bresenham(t_data *data, t_coords *start, t_coords *end);
 /* void	draw_line(t_data *data, t_wu *wu, int color1, int color2); */
 void drawline(t_fdf *fdf, int x0, int y0, int x1, int y1, int startColor, int endColor);
+void	print_coords(t_fdf *fdf);
 
 #endif

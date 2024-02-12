@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:28:33 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:44:37 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:34:42 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,11 @@ void	ft_start_mlx(t_fdf *fdf)
 			DEFAULT_HEIGHT);
 	fdf->img.addr = mlx_get_data_addr(fdf->img.img, &fdf->img.bits_per_pixel,
 			&fdf->img.line_length, &fdf->img.endian);
+}
+
+void	my_mlx_put_image_to_window(t_fdf *fdf)
+{
+	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
+	put_menu_win(fdf);
+	write_menu(fdf);
 }

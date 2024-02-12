@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:03:03 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 13:00:47 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:46:29 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int				ft_lstsize(t_list *lst);
 /*                     Functions inside /gnl                                  */
 /******************************************************************************/
 char			*ft_get_next_line(int fd);
+char			*ft_get_next_line_no_nl(int fd);
 ssize_t			ft_get_all_lines(const char *file, char ***all_lines);
 /******************************************************************************/
 /*                     Functions inside /mem                                  */

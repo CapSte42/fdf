@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:07:12 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/01 17:25:46 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:45:44 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*ft_remainder_trim(char *remainder)
 	return (line);
 }
 
-static char	*ft_get_line(char *remainder)
+static char	*ft_get_line(char *remainder, int flag)
 {
 	char	*line;
 	size_t	index;
@@ -50,6 +50,7 @@ static char	*ft_get_line(char *remainder)
 	while (*remainder != '\n' && *remainder)
 		line[index++] = *remainder++;
 	if (*remainder == '\n')
+	if (flag == 0)
 		line[index] = '\n';
 	return (line);
 }
@@ -104,7 +105,34 @@ char	*ft_get_next_line(int fd)
 	remainder[fd] = ft_read_line(fd, remainder[fd]);
 	if (!remainder[fd])
 		return (NULL);
-	line = ft_get_line(remainder[fd]);
+	line = ft_get_line(remainder[fd], 0);
+	remainder[fd] = ft_remainder_trim(remainder[fd]);
+	return (line);
+}
+
+char	*ft_get_next_line_no_nl(int fd)
+{
+	char		*line;
+	static char	*remainder[FD_MAX];
+	int			i;
+
+	if (fd == -1 || BUFFER_SIZE <= 0 || fd >= FD_MAX)
+		return (NULL);
+	if (fd == -42)
+	{
+		i = 0;
+		while (remainder[i])
+		{
+			free(remainder[i]);
+			remainder[i] = NULL;
+			i++;
+		}
+		return (NULL);
+	}
+	remainder[fd] = ft_read_line(fd, remainder[fd]);
+	if (!remainder[fd])
+		return (NULL);
+	line = ft_get_line(remainder[fd], 1);
 	remainder[fd] = ft_remainder_trim(remainder[fd]);
 	return (line);
 }

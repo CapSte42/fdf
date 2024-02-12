@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:54:29 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:13:52 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define DEFAULT_WIDTH 1920
 # define DEFAULT_HEIGHT 1080
+
+# define MENU_WIDTH 250
 
 # define BACKGROUND_COLOR 0x00000FF
 # define DRAWING_COLOR 0x80FFFFFF
@@ -49,6 +51,7 @@ typedef struct s_zoom
 	int					center_x;
 	int					center_y;
 	int					scaling;
+	int					angle;
 }						t_zoom;
 
 typedef struct s_fdf
@@ -57,6 +60,9 @@ typedef struct s_fdf
 	t_zoom				zoom;
 	int					x_axis;
 	int					y_axis;
+	int					z_max;
+	int					z_min;
+	int					z_mod;
 	int					index;
 	char				*name;
 	void				*mlx;
@@ -97,9 +103,14 @@ typedef struct s_draw
 void		ft_checkfile(char *file, t_fdf *fdf);
 t_coords	*ft_read_coordinate(char **all_lines);
 void		set_zoom_and_center(t_fdf *fdf);
-void		int_to_isometric_pixel(t_fdf *info);
-void		int_to_perspective_projection(t_fdf *fdf);
+void		isometric_projection(t_fdf *info);
+void		conic_projection(t_fdf *fdf);
 void		drawline(t_fdf *fdf, t_coords start, t_coords end);
+void		reset_iso_coords(t_fdf *fdf);
+void		put_menu_win(t_fdf *fdf);
+void		write_menu(t_fdf *fdf);
+void		put_signature(t_fdf *fdf);
+int			x_pos(char *s);
 /*
  *
  *
@@ -108,10 +119,12 @@ void		drawline(t_fdf *fdf, t_coords start, t_coords end);
 int		ft_cool_exit(t_fdf *fdf);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_start_mlx(t_fdf *fdf);
+void	my_mlx_put_image_to_window(t_fdf *fdf);
 /*
  *
  *
  *
 */
 void		print_coords(t_fdf *fdf);
+void		print_iso_coords(t_fdf *fdf);
 #endif

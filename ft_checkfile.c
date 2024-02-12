@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:13:19 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:56:57 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static int	set_line(int last_x, int y, char **all_lines, t_coords *coords)
 	{
 		coords[current_i].x = (int)(current_i % last_x);
 		coords[current_i].y = (int)(current_i / last_x);
+		coords[current_i].iso_x = (int)(current_i % last_x);
+		coords[current_i].iso_y = (int)(current_i / last_x);
 		current_elem = ft_split(y_line[i], ',');
 		if (!current_elem)
 			return (ft_free_n(0, 1, &y_line), 0);
@@ -144,4 +146,5 @@ void	ft_checkfile(char *file, t_fdf *fdf)
 	ft_free_n(0, 1, &all_lines);
 	fdf->name = ft_strdup(file);
 	fdf->index = fdf->x_axis * fdf->y_axis;
+	fdf->z_mod = 0;
 }

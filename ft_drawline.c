@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 15:54:56 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:20:12 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:21:58 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	calculate_drawing_params(t_draw *draw)
 	draw->color_step_b = (float)(draw->end_b - draw->start_b) / draw->steps;
 }
 
-static void	set_draw(t_draw *draw, t_coords start, t_coords end)
+void	set_draw(t_draw *draw, t_coords start, t_coords end) //cazzi
 {
 	set_coords_and_colors(draw, start, end);
 	calculate_drawing_params(draw);

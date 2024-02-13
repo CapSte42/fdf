@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:33:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/12 17:41:56 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/13 23:19:03 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,15 @@ void	isometric_projection(t_fdf *info)
 	{
 		info->coords[i].iso_x
 			= (info->zoom.center_x)
-			+ ((info->coords[i].x
-					- info->coords[i].y)
+			+ (
+				(info->coords[i].x - info->coords[i].y)
 				* cos(PI / 6)
 				* info->zoom.scaling);
 		info->coords[i].iso_y
 			= (info->zoom.center_y)
-			- (info->coords[i].z
-				* sin(PI / 6)
-				* info->zoom.scaling)
-			+ ((info->coords[i].x
-					+ info->coords[i].y)
+			- ((info->coords[i].z) * sin(PI / 6) * info->zoom.scaling)
+			+ (
+				(info->coords[i].x + info->coords[i].y)
 				* sin(PI / 6)
 				* info->zoom.scaling);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:28:33 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/12 17:34:42 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:32:42 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,37 @@ void	ft_start_mlx(t_fdf *fdf)
 			&fdf->img.line_length, &fdf->img.endian);
 }
 
-void	my_mlx_put_image_to_window(t_fdf *fdf)
+void	clear_menu_win(t_fdf *fdf)
 {
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < DEFAULT_HEIGHT)
+	{
+		j = 0;
+		while (j < MENU_WIDTH)
+		{
+			my_mlx_pixel_put(&fdf->img, j, i, 0x000000);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	my_mlx_put_image_to_window(t_fdf *fdf, int flag)
+{
+	static int	i;
+
+	if (flag == 1 || i == 0)
+		i++;
+	if (i % 2 == 0)
+		clear_menu_win(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
-	put_menu_win(fdf);
-	write_menu(fdf);
+	if (i % 2 != 0)
+	{
+		put_menu_win(fdf);
+		write_menu(fdf);
+	}
+	put_signature(fdf);
 }

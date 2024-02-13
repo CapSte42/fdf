@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:30:13 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/12 18:16:41 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:35:32 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,23 @@ static void put_controls_2(t_fdf *fdf)
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 640, 0xffd700
 		, "Left Click : Move");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 660, 0xffd700
-		, "Scroll     : zoom In/Out");
+		, "Scroll     : Zoom In/Out");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 680, 0xffd700
-		, "Arrows     : Rotate X/Y axis");
+		, "Left/Right : Rotate Y axis");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 700, 0xffd700
-		, "Q/W        : Rotate Z axis");
+		, "Up/Down    : Rotate X axis");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 720, 0xffd700
-		, "+/-        : Change Z modifier");
+		, "+/-        : Change Height");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 740, 0xffd700
-		, "R          : Reset Z modifier");
+		, "R          : Reset Height");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 760, 0xffd700
 		, "Right Click: Change projection");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 780, 0xffd700
 		, "C          : Change color");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 800, 0xffd700
 		, "Space      : Reset");
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 820, 0xffd700
+		, "H          : Hide/Show Menu");
 }
 
 void	write_menu(t_fdf *fdf)
@@ -101,5 +103,4 @@ void	write_menu(t_fdf *fdf)
 	put_draw_info(fdf);
 	put_controls_1(fdf);
 	put_controls_2(fdf);
-	put_signature(fdf);
 }

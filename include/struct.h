@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:31:07 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/13 22:29:04 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/14 01:02:31 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 typedef struct s_coords
 {
-	int					x;
-	int					y;
+	float					x;
+	float					y;
 	float				z;
 	int					is_zero;
 	float				iso_x;
@@ -45,6 +45,9 @@ typedef struct s_fdf
 {
 	t_coords			*coords;
 	t_zoom				zoom;
+	double				rot_x;
+	double				rot_y;
+	double				rot_z;
 	int					x_axis;
 	int					y_axis;
 	int					z_max;

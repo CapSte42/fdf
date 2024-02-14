@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/13 23:19:15 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/14 01:13:18 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		print_iso_coords(t_fdf *fdf);
 /*
  * in key_press_related.c
 */
+void	reset_z(t_fdf *info);
 int	key_hook(int keycode, t_fdf *fdf);
 /*
 * in main.c

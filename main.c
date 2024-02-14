@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:59:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/13 22:31:34 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/14 00:45:39 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int ac, char **av)
 	ft_checkfile(av[1], &fdf);
 	ft_start_mlx(&fdf);
 	set_is_zero(&fdf);
+	reset_iso_coords(&fdf);
 	set_zoom_and_center(&fdf);
 	isometric_projection(&fdf);
 	//conic_projection(&fdf);

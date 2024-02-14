@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 21:33:43 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/11 21:37:38 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/02/14 01:13:39 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,8 @@ void	set_zoom_and_center(t_fdf *fdf)
 	fdf->zoom.center_x = DEFAULT_WIDTH / 2;
 	fdf->zoom.center_y = (DEFAULT_HEIGHT / 2)
 		- (fdf->y_axis * fdf->zoom.scaling / 2);
+	fdf->rot_x = 0;
+	fdf->rot_y = 0;
+	fdf->rot_z = 0;
+	reset_z(fdf);
 }

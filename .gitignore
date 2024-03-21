@@ -1,0 +1,15 @@
+# Ignora tutti i file nascosti
+.*
+
+# Ignora tutti i file .o (file oggetto)
+*.o
+
+# Ignora tutti i file .a (archivi statici)
+*.a
+
+# Ignora tutti i file .fdf
+*.fdf
+
+# Risultati di compilazione
+fdf
+

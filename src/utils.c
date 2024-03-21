@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 09:06:21 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/29 12:25:01 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/03/22 00:25:25 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,16 @@ void	put_menu_win(t_fdf *fdf)
 		y = 0;
 		while (y < DEFAULT_HEIGHT)
 		{
-			my_mlx_pixel_put(&(fdf->img), x, y, 0x333333);
+			if (x % 2 == 0)
+			{
+				if (y % 2 == 0)
+					my_mlx_pixel_put(&(fdf->img), x, y, 0x202540);
+			}
+			else
+			{
+				if (y % 2 != 0)
+					my_mlx_pixel_put(&(fdf->img), x, y, 0x202540);
+			}
 			y++;
 		}
 		x++;

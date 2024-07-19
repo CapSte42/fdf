@@ -1,3 +1,7 @@
+![fdf](https://github.com/user-attachments/assets/430197e1-8d1f-41d8-8c8b-c9fdaea313dd)
+
+
+
 # FDF 
 Wireframe model
 
@@ -5,6 +9,10 @@ FdF, short for "Fil de Fer" (English: "Wireframe"), is a programming project fro
 
 ## Introduction
 The core objective of this project is the isometric rendering of a map, creating a 3D visual effect akin to that used in video games. To enhance the functionality and user experience, I've also incorporated an information menu, spherical projection, and the ability to translate the view around all axes.
+
+
+![fdf_pylone](https://github.com/user-attachments/assets/eb68464f-24c1-48b2-8094-573d03b5d744)
+
 
 ## Features
 This FdF project comes with a range of features, including:
@@ -14,6 +22,10 @@ Information Menu: An interactive menu that displays key controls and information
 Spherical Projection: An additional projection method that offers a different perspective on the data.
 Axis Translation: Allows the user to translate the view around the X, Y, and Z axes for comprehensive visualization.
 Interactive Controls: Users can interact with the map through a variety of controls to zoom, move, and rotate the view.
+
+
+![fdfjulia](https://github.com/user-attachments/assets/0d8d3721-4bb3-419a-9d65-afc1d737cca2)
+
 
 ## Installation and Usage
 To get started with this FdF project, follow these steps:
@@ -38,6 +50,10 @@ Enhance your experience and interaction with the FdF project using these command
 - H Key: Hide or show the information menu.
 - G Key: Toggle spherical projection.
 This set of controls is designed to offer a comprehensive and immersive way to explore and interact with the 3D maps rendered by the FdF program.
+
+
+![fdfworld](https://github.com/user-attachments/assets/45649bf2-577c-476d-9941-ccc61c4eb847)
+
 
 ## Technologies Used
 C Language: The core programming language used for developing the project.

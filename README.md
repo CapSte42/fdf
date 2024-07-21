@@ -5,13 +5,17 @@
 # FDF 
 Wireframe model
 
+
+![42_color](https://github.com/user-attachments/assets/03655364-0b11-4236-ae29-81fd5729c42a)
+
+
 FdF, short for "Fil de Fer" (English: "Wireframe"), is a programming project from the 42 school curriculum. The primary goal of this project is to render an isometric view of a map to achieve a 3D effect, similar to what is utilized in video games. As a secondary objective, I have implemented an informational menu, spherical projection, and translation across all axes.
 
 ## Introduction
 The core objective of this project is the isometric rendering of a map, creating a 3D visual effect akin to that used in video games. To enhance the functionality and user experience, I've also incorporated an information menu, spherical projection, and the ability to translate the view around all axes.
 
 
-![fdf_pylone](https://github.com/user-attachments/assets/eb68464f-24c1-48b2-8094-573d03b5d744)
+![colorpylone](https://github.com/user-attachments/assets/a78977c9-6eb7-496b-bb5d-3115cf92ff0c)
 
 
 ## Features
@@ -52,7 +56,7 @@ Enhance your experience and interaction with the FdF project using these command
 This set of controls is designed to offer a comprehensive and immersive way to explore and interact with the 3D maps rendered by the FdF program.
 
 
-![fdfworld](https://github.com/user-attachments/assets/45649bf2-577c-476d-9941-ccc61c4eb847)
+![colorearth](https://github.com/user-attachments/assets/3fd742ef-e2db-4754-b020-8ddfaeb13919)
 
 
 ## Technologies Used

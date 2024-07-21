@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:38:22 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/29 15:13:36 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/07/21 08:17:54 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,27 @@ void	calculate_look_at_for_height_map(t_fdf *info)
 	info->look_at.x = (info->x_axis - 1) / 2.0;
 	info->look_at.y = (info->y_axis - 1) / 2.0;
 	info->look_at.z = (info->z_min + info->z_max) / 2.0;
+}
+
+void	change_color(t_fdf *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->index)
+	{
+		if (info->coords[i].is_zero == 0)
+		{
+			info->coords[i].color = 0x00FF00;
+		}
+		else if (info->coords[i].is_zero > 1)
+		{
+			info->coords[i].color = 0xFF0000;
+		}
+		else
+		{
+			info->coords[i].color = 0x0000FF;
+		}
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:18:06 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/29 15:14:03 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/07/21 08:34:21 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,9 @@ int			main(int ac, char **av);
 //	TOUPint y, unsigned int color, double opacity);
 void		drawLine(t_fdf *fdf, t_coords start, t_coords end);
 // aggiustare //
+void		change_earth_color(t_fdf *fdf);
+void		change_stroboscope_color(t_fdf *fdf);
+void		change_shadowed_color(t_fdf *fdf);
+void		reset_colors(t_fdf *fdf);
 
 #endif

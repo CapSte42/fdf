@@ -30,7 +30,8 @@ SRC = src/debug_utils.c \
 	  src/put_signature.c \
 	  src/sphere_related.c \
 	  src/utils.c \
-	  src/zoom_related.c
+	  src/zoom_related.c \
+	  src/change_color.c 
 # Main target
 $(NAME): $(LIBMLX) $(LIBFT) $(SRC)
 	$(CC) $(FLAGS) $(SRC) $(LIBFT) $(MLX) -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:08:52 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/29 15:05:35 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/07/21 08:33:08 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	ft_cool_exit(t_fdf *fdf)
 static int	right_board_hook(int keycode, t_fdf *fdf)
 {
 	if (keycode == XK_Left)
-		fdf->rot_y -= 0.1;
+		fdf->rot_y -= fdf->acceleration;
 	if (keycode == XK_Right)
-		fdf->rot_y += 0.1;
+		fdf->rot_y += fdf->acceleration;
 	if (keycode == XK_Up)
-		fdf->rot_x -= 0.1;
+		fdf->rot_x -= fdf->acceleration;
 	if (keycode == XK_Down)
-		fdf->rot_x += 0.1;
+		fdf->rot_x += fdf->acceleration;
 	if (keycode == XK_KP_Add)
 		update_z(fdf, 1);
 	if (keycode == XK_KP_Subtract)
@@ -56,9 +56,27 @@ static int	left_board_hook(int keycode, t_fdf *fdf)
 	if (keycode == XK_h)
 		my_mlx_put_image_to_window(fdf, 1);
 	if (keycode == XK_a)
-		fdf->rot_z += 0.1;
+		fdf->rot_z += fdf->acceleration;
 	if (keycode == XK_d)
-		fdf->rot_z -= 0.1;
+		fdf->rot_z -= fdf->acceleration;
+	if (keycode == XK_q)
+	{
+		if (fdf->acceleration < 5)
+			fdf->acceleration += 0.1;
+	}
+	if (keycode == XK_w)
+	{
+		if (fdf->acceleration > 0.1)
+			fdf->acceleration -= 0.1;
+	}
+	if (keycode == XK_1)
+		change_earth_color(fdf);
+	if (keycode == XK_2)
+		change_stroboscope_color(fdf);
+	if (keycode == XK_3)
+		change_shadowed_color(fdf);
+	if (keycode == XK_4)
+		reset_colors(fdf);
 	return (0);
 }
 

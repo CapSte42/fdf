@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:31:07 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/28 18:11:27 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/07/21 08:38:58 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_coords
 	int						is_visible;
 	unsigned long int		tmp_color;
 	unsigned long int		color;
+	unsigned long int		original_color;
 }						t_coords;
 
 typedef struct s_data
@@ -68,6 +69,7 @@ typedef struct s_fdf
 	int					initial_x;
 	int					initial_y;
 	int					keep_parallel;
+	double				acceleration;
 	t_data				img;
 }						t_fdf;
 

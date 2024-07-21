@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:30:13 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/29 14:41:39 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/07/21 08:37:37 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	put_map_info(t_fdf *fdf)
 	free(to_write);
 }
 
+// added after evaluation the value speed
 static void	put_draw_info(t_fdf *fdf)
 {
 	char	*to_write;
@@ -65,6 +66,10 @@ static void	put_draw_info(t_fdf *fdf)
 	to_write = ft_itoa(fdf->zoom.scaling);
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 110, 300, 0xff8c00, to_write);
 	free(to_write);
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 320, 0xFFFFFF, "Speed      :");
+	to_write = ft_itoa(fdf->acceleration * 10);
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 190, 320, 0xff8c00, to_write);
+	free(to_write);
 }
 
 static void	put_controls_1(t_fdf *fdf)
@@ -74,9 +79,9 @@ static void	put_controls_1(t_fdf *fdf)
 	to_write = "<<< ---- CONTROLS ---- >>>";
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 10, 610, -1, to_write);
 	to_write = "ESC : QUIT :(";
-	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 870, 0xdc143c, to_write);
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 900, 0xdc143c, to_write);
 	to_write = "(but you can always come back!)";
-	mlx_string_put(fdf->mlx, fdf->mlx_win, 10, 890, 0xdc143c,
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 10, 910, 0xdc143c,
 		to_write);
 }
 
@@ -102,6 +107,12 @@ static void	put_controls_2(t_fdf *fdf)
 		"Space      : Reset");
 	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 820, 0xffd700,
 		"H          : Hide/Show Menu");
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 840, 0xffd700,
+		"Q/W        : Change Speed");
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 860, 0xffd700,
+		"1/2/3      : Change Colors");
+	mlx_string_put(fdf->mlx, fdf->mlx_win, 20, 880, 0xffd700,
+		"4          : Reset Colors");
 }
 
 void	write_menu(t_fdf *fdf)

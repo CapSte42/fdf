@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:53 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/29 14:11:45 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/07/21 08:32:28 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,11 @@ static t_coords	*set_coords(int n_lines, int elem_in_row, char **all_lines)
 	index = n_lines * elem_in_row;
 	ft_printf("%s\n\n All %d coords read.\n\tEnjoy\n%s", GREEN, index, RESET);
 	while (++i < index)
+	{
 		if (coords[i].color == 0)
 			coords[i].color = DRAWING_COLOR;
+		coords[i].original_color = coords[i].color;
+	}
 	return (coords);
 }
 

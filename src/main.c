@@ -6,7 +6,7 @@
 /*   By: smontuor <smontuor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:59:24 by smontuor          #+#    #+#             */
-/*   Updated: 2024/02/29 12:41:47 by smontuor         ###   ########.fr       */
+/*   Updated: 2024/07/21 08:40:49 by smontuor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		ft_exit_error("Yeah. Whatever.");
+	/*this definitely should be in a function*/
 	fdf.is_sphere = 0;
 	fdf.is_left_button_pressed = 0;
 	fdf.is_right_button_pressed = 0;
+	fdf.acceleration = 0.1;
+	/*---------------------------------------*/
 	ft_checkfile(av[1], &fdf);
 	ft_start_mlx(&fdf);
 	set_is_zero(&fdf);
